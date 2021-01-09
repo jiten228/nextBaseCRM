@@ -60,9 +60,9 @@ public class TestCase3_2 {
         }
 
         //*******************************************************************************
-        // Search (find people, documents) box & assign value "cybertek"+Enter Key
+        // Search (find people, documents) box & assign value and press Enter Key
         //*******************************************************************************
-        ArrayList<String> negativeData = new ArrayList<String>(Arrays.asList("Cricket",
+        ArrayList<String> negativeData = new ArrayList<>(Arrays.asList("Cricket",
                 "Donald Trump", "Chicago"));
 
         for (String each : negativeData) {
@@ -78,7 +78,7 @@ public class TestCase3_2 {
                         System.out.println("Key Word FAILED! For: " + each);
                     }
                 }catch (NoSuchElementException e){
-                    e.getMessage();
+                    e.printStackTrace();
                 }
 
                 }
