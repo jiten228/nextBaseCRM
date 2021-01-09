@@ -7,12 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.security.Key;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public class TestCase3_2 {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException{
 
         // Setup webdriver
         WebDriverManager.chromedriver().setup();
@@ -59,46 +60,28 @@ public class TestCase3_2 {
         }
 
         //*******************************************************************************
-        // Search (find people, documents) box & type any single alphabet either a-z / A-Z
+        // Search (find people, documents) box & assign value "cybertek"+Enter Key
         //*******************************************************************************
-/*
-        WebElement searchBox = driver.findElement(By.xpath("//input[@id = 'search-textbox-input']"));
-        searchBox.sendKeys("Time and Reports");
-        Thread.sleep(2000);
-        searchBox.sendKeys(Keys.ENTER);
+        ArrayList<String> negativeData = new ArrayList<String>(Arrays.asList("Cricket",
+                "Donald Trump", "Chicago"));
 
-        ArrayList<String> positiveData = new ArrayList<String>(Arrays.asList("Employees", "Tasks",
-                "Documents", "Workgroups", "Mail", "Drive"));
+        for (String each : negativeData) {
 
-        for (String each : positiveData) {
+            WebElement searchBox = driver.findElement(By.xpath("//input[@id = 'search-textbox-input']"));
+            searchBox.sendKeys(each);
+            Thread.sleep(3000);
+            searchBox.sendKeys(Keys.ENTER);
+            System.out.println("===========================================================");
+                try {
+                    WebElement getElement = driver.findElement(By.id("feed-empty-wrap"));
+                    if (getElement.getText().equals("Nothing found")) {
+                        System.out.println("Key Word FAILED! For: " + each);
+                    }
+                }catch (NoSuchElementException e){
+                    e.getMessage();
+                }
 
-*/
-        WebElement searchBox = driver.findElement(By.xpath("//input[@id = 'search-textbox-input']"));
-        searchBox.sendKeys("z");
-        Thread.sleep(2000);
-        //searchBox.sendKeys(Keys.ENTER);
-        System.out.println("===========================================================");
-        boolean isLocate = driver.findElement(By.className("search-title-top-subtitle-text")).isDisplayed();
-        System.out.println("isLocate = " + isLocate);
-        WebElement getElement = driver.findElement(By.className("search-title-top-subtitle-text"));
-        String getValue = getElement.getText();
-        if ((getValue.equals("Employees")) || (getValue.equals("Groups")) || (getValue.equals("Search")) || getValue.equals("Menu items")) {
-            System.out.println("Key Alphabet PASSED! : ");
-        } else {
-            System.out.println("Key Word FAILED! For: ");
-        }
-
-
-
-/*
-            Thread.sleep(2000);
-            driver.findElement(By.id("user-name")).click();//getting to the logout link
-            Thread.sleep(2000);
-            driver.findElement(By.linkText("Log out")).click();//the actual log out link
-
-            driver.findElement(By.name("USER_LOGIN")).clear(); //username
-*/
-        //}
+                }
         driver.close();
     }
 }
