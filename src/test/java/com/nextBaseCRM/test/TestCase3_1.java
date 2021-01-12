@@ -6,16 +6,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public class TestCase3_1 {
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) throws InterruptedException {
 
         // Setup webdriver
         WebDriverManager.chromedriver().setup();
@@ -62,18 +59,11 @@ public class TestCase3_1 {
         }
 
         //*******************************************************************************
-        // Search (find people, documents) box & assign value "employee"+Enter Key
+        // Search (find people, documents) box & assign value and press Enter Key
         //*******************************************************************************
-/*
-        WebElement searchBox = driver.findElement(By.xpath("//input[@id = 'search-textbox-input']"));
-        searchBox.sendKeys("Time and Reports");
-        Thread.sleep(2000);
-        searchBox.sendKeys(Keys.ENTER);
-*/
-        ArrayList<String> positiveData = new ArrayList<String>(Arrays.asList("Employees", "Tasks",
-            "Documents",
-                //"Time and Reports",
-                "Workgroups", "Mail", "Drive"));
+
+        ArrayList<String> positiveData = new ArrayList<>(Arrays.asList("Employees", "Tasks",
+                "Documents", "Workgroups", "Mail", "Drive"));
 
         for (String each : positiveData) {
 
@@ -82,7 +72,9 @@ public class TestCase3_1 {
             Thread.sleep(3000);
             searchBox.sendKeys(Keys.ENTER);
             System.out.println("===========================================================");
-            boolean isLocate = driver.findElement(By.xpath("//input[@id = 'search-textbox-input']")).isDisplayed();
+
+            boolean isLocate;
+            isLocate = driver.findElement(By.xpath("//input[@id = 'search-textbox-input']")).isDisplayed();
             if (isLocate) {
 
                 actualTitle = driver.getTitle();
@@ -94,32 +86,12 @@ public class TestCase3_1 {
                         String getValue = getElement.getText();
                         if (getValue.toLowerCase().contains(each.toLowerCase())) {
                             System.out.println("Key Word PASSED! : " + each);
-                            //continue;
                         }
                     } catch (NoSuchElementException e) {
-                        e.getMessage();
+                        e.printStackTrace();
                     }
 
-                /*
-                try {
-                    WebElement getElement = driver.findElement(By.className("feed-wrap-empty"));
-                    if (getElement.getText().equals("Nothing found")) {
-                        System.out.println("Key Word FAILED! For: " + each);
-                    }
-                }catch (NoSuchElementException e){
-                    e.getMessage();
                 }
-                */
-                }
-
-/*
-            Thread.sleep(2000);
-            driver.findElement(By.id("user-name")).click();//getting to the logout link
-            Thread.sleep(2000);
-            driver.findElement(By.linkText("Log out")).click();//the actual log out link
-
-            driver.findElement(By.name("USER_LOGIN")).clear(); //username
-*/
             }
         }
         driver.close();
