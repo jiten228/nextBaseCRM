@@ -15,6 +15,11 @@ public class TestCase1_2and3and4 {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
 
+<<<<<<< HEAD
+=======
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+>>>>>>> origin/main
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -114,6 +119,10 @@ public class TestCase1_2and3and4 {
                     System.out.println("ActualText = " + actualText);
                 }
             }
+<<<<<<< HEAD
          driver.close();
+=======
+            driver.close();
+>>>>>>> origin/main
         }
     }
