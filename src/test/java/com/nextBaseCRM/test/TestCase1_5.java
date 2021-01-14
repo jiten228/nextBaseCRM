@@ -18,12 +18,11 @@ public class TestCase1_5 {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
-<<<<<<< HEAD
-=======
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
->>>>>>> origin/main
+
         driver.get("http://login2.nextbasecrm.com/");
 
         // Verify title equals:
