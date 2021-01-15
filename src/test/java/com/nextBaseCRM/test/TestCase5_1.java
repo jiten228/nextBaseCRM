@@ -62,27 +62,39 @@ Password:  UserUser
         Thread.sleep(3000);
 
 
-        //create a Vote
+        //create a Poll
 
         driver.findElement(By.xpath("//span[@id='feed-add-post-form-tab-vote']")).click();
 
-        WebElement inputMessage= driver.findElement(By.xpath("//input[@id='question_0']"));
-
-        inputMessage.sendKeys("aaaa");
+        Thread.sleep(2000);
 
 
+        Thread.sleep(3000);
+        WebElement inputQuestion = driver.findElement(By.xpath("//input[@id='question_0']"));
+        inputQuestion.sendKeys("Which of them is the step of SDLC ?");
 
+        Thread.sleep(3000);
+        WebElement answer1 = driver.findElement(By.xpath("//input[@id='answer_0__0_']"));
+        answer1.sendKeys("Design");
+
+        WebElement answer2 = driver.findElement(By.xpath("//input[@id='answer_0__1_']"));
+        answer2.sendKeys("Grooming Meeting");
+        Thread.sleep(3000);
+
+        WebElement answer3 = driver.findElement(By.xpath("//input[@id='answer_0__2_']"));
+        answer3.sendKeys("Deploying");
+        Thread.sleep(3000);
+
+        driver.findElement(By.xpath("//input[@id='multi_0']")).click();
+        Thread.sleep(2000);
+
+
+        //    driver.findElement(By.xpath("//button[@class='ui-btn ui-btn-lg ui-btn-primary']"));
 
 
         //Answer and Vote
-     /*
-        WebElement answer=driver.findElement(By.xpath("//div/button[@class='bx-vote-block-inp-substitute']"));
 
-        WebElement VoteElement=driver.findElement(By.xpath("//div/button[@class='ui-btn ui-btn-lg ui-btn-primary']"));
-        VoteElement.getText();
-        Thread.sleep(3000);
-        VoteElement.click();
-*/
+
     }
 
 
