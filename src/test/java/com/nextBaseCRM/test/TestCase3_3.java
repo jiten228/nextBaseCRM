@@ -59,7 +59,7 @@ public class TestCase3_3 {
         //*******************************************************************************
 
         WebElement searchBox = driver.findElement(By.xpath("//input[@id = 'search-textbox-input']"));
-        searchBox.sendKeys("z");
+        searchBox.sendKeys("#");
         Thread.sleep(2000);
         //searchBox.sendKeys(Keys.ENTER);
         System.out.println("===========================================================");
@@ -67,7 +67,7 @@ public class TestCase3_3 {
         System.out.println("isLocate = " + isLocate);
         WebElement getElement = driver.findElement(By.className("search-title-top-subtitle-text"));
         String getValue = getElement.getText();
-        if ((getValue.equals("Employees")) || (getValue.equals("Groups")) || (getValue.equals("Search")) || getValue.equals("Menu items")) {
+        if ((getValue.equals("Employees")) || (getValue.equals("Groups"))  || getValue.equals("Menu items")) {
             System.out.println("Key Alphabet PASSED! : ");
         } else {
             System.out.println("Key Word FAILED! For: ");
