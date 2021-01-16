@@ -62,7 +62,7 @@ public class TestCase3_2 {
         //*******************************************************************************
         // Search (find people, documents) box & assign value and press Enter Key
         //*******************************************************************************
-        ArrayList<String> negativeData = new ArrayList<>(Arrays.asList("Cricket",
+        ArrayList<String> negativeData = new ArrayList<>(Arrays.asList("kitkat",
                 "Donald Trump", "Chicago"));
 
         for (String each : negativeData) {
@@ -73,9 +73,12 @@ public class TestCase3_2 {
             searchBox.sendKeys(Keys.ENTER);
             System.out.println("===========================================================");
                 try {
+                    System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
                     WebElement getElement = driver.findElement(By.id("feed-empty-wrap"));
-                    if (getElement.getText().equals("Nothing found")) {
-                        System.out.println("Key Word FAILED! For: " + each);
+                    if (getElement.isDisplayed()){
+                        if (getElement.getText().equals("Nothing found")) {
+                            System.out.println("Key Word FAILED! For: " + each);
+                        }
                     }
                 }catch (NoSuchElementException e){
                     e.printStackTrace();
