@@ -55,7 +55,7 @@ Password:  UserUser
     public void TC_5_1() throws InterruptedException {
         String userName = "helpdesk50@cybertekschool.com";
         String passWord = "UserUser";
-//login
+        //login
         driver.findElement(By.name("USER_LOGIN")).sendKeys(userName);
         driver.findElement(By.name("USER_PASSWORD")).sendKeys(passWord);
 
@@ -67,23 +67,15 @@ Password:  UserUser
 
         driver.findElement(By.xpath("//span[@id='feed-add-post-form-tab-vote']")).click();
 
-        Thread.sleep(2000);
-
-        WebElement editorFrame = driver.findElement(By.xpath("//iframe[@class='bx-editor-iframe']"));
-        driver.switchTo().frame(editorFrame);
-        WebElement cursor = driver.switchTo().activeElement();
-        cursor.sendKeys("There is a Poll for you.", Keys.ENTER);
-        driver.switchTo().defaultContent();
-
-
-
         Thread.sleep(3000);
+
         WebElement inputQuestion = driver.findElement(By.xpath("//input[@id='question_0']"));
         inputQuestion.sendKeys("Which of them is the step of SDLC ?");
-
         Thread.sleep(3000);
+
         WebElement answer1 = driver.findElement(By.xpath("//input[@id='answer_0__0_']"));
         answer1.sendKeys("Design");
+        Thread.sleep(3000);
 
         WebElement answer2 = driver.findElement(By.xpath("//input[@id='answer_0__1_']"));
         answer2.sendKeys("Grooming Meeting");
@@ -94,8 +86,14 @@ Password:  UserUser
         Thread.sleep(3000);
 
         driver.findElement(By.xpath("//input[@id='multi_0']")).click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
 
+        WebElement editMessage = driver.findElement(By.xpath("//iframe[@class='bx-editor-iframe']"));
+        driver.switchTo().frame(editMessage);
+        WebElement cursor = driver.switchTo().activeElement();
+        cursor.sendKeys("There is a Poll for you.", Keys.ENTER);
+        driver.switchTo().defaultContent();
+        Thread.sleep(3000);
 
         //    driver.findElement(By.xpath("//button[@class='ui-btn ui-btn-lg ui-btn-primary']"));
 
