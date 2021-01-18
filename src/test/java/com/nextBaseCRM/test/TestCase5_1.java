@@ -2,6 +2,7 @@ package com.nextBaseCRM.test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -67,6 +68,13 @@ Password:  UserUser
         driver.findElement(By.xpath("//span[@id='feed-add-post-form-tab-vote']")).click();
 
         Thread.sleep(2000);
+
+        WebElement editorFrame = driver.findElement(By.xpath("//iframe[@class='bx-editor-iframe']"));
+        driver.switchTo().frame(editorFrame);
+        WebElement cursor = driver.switchTo().activeElement();
+        cursor.sendKeys("There is a Poll for you.", Keys.ENTER);
+        driver.switchTo().defaultContent();
+
 
 
         Thread.sleep(3000);
