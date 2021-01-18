@@ -104,12 +104,38 @@ public class TestCase7 {
                 System.out.println("Users can not see the list of people");
             }
 
-            Thread.sleep(2000);
-            driver.findElement(By.id("user-name")).click();//getting to the logout link
-            Thread.sleep(2000);
-            driver.findElement(By.linkText("Log out")).click();//the actual log out link
-            driver.findElement(By.name("USER_LOGIN")).clear(); //username
         }
+
+        WebElement starIcon = driver.findElement(By.xpath("//div[@id='log_entry_favorites_6881']"));
+        starIcon.click();
+        Thread.sleep(3000);
+
+        if (starIcon.isDisplayed()) {
+            System.out.println("Users can save post as a favorite");
+        } else {
+            System.out.println("Users can not save a post as a favorite");
+        }
+
+        WebElement commentButton = driver.findElement(By.xpath("//a[@id='blog-post-addc-add-3021']"));
+        commentButton.click();
+        Thread.sleep(5000);
+
+        if (commentButton.isDisplayed()){
+            System.out.println("Users are able to see an opened comment box");
+        }else {
+            System.out.println("Users are not able to see an opened comment box ");
+        }
+
+        WebElement cancelButton = driver.findElement(By.xpath("//button[@class='ui-btn ui-btn-sm ui-btn-link'][1]"));
+        cancelButton.click();
+        Thread.sleep(3000);
+
+        if (!cancelButton.isDisplayed()){
+            System.out.println("Users are able to cancel the comment");
+        }else {
+            System.out.println("Users are not able to cancel the comment");
+        }
+
         driver.close();
     }
 }
