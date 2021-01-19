@@ -5,26 +5,27 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-public class TestCase7 {
+public class TestCase7_1 {
 
-    public static void main(String[] args) throws InterruptedException {
-
+    WebDriver driver;
+    @BeforeMethod
+    public void netBaseLoginPage() throws InterruptedException {
         //  Open Chrome browser
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-
+        driver = new ChromeDriver();
+        driver.get("http://login2.nextbasecrm.com/");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-
-        driver.get("http://login2.nextbasecrm.com/");
-
-        // Verify title equals:
-        // Expected: Authorization
+        //  Verify title equals
+        //  Expected: Authorization
         String expectedTitle = "Authorization";
         String actualTitle = driver.getTitle();
         if (actualTitle.equals(expectedTitle)) {
@@ -33,42 +34,45 @@ public class TestCase7 {
             System.err.println("Landing page title verification FAILED!");
             System.out.println("Expected title = " + expectedTitle);
             System.out.println("Actual title = " + actualTitle);
+            Thread.sleep(3000);
         }
-
-        // TC #2. Enter positive user name and negative user name.
-        // TC #3. Enter positive user password and negative user password.
-
-        /*
-        Usernames:
-    helpdesk39@cybertekschool.com
-    helpdesk40@cybertekschool.com
-    marketing39@cybertekschool.com
-    marketing40@cybertekschool.com
-    hr39@cybertekschool.com
-    hr40@cybertekschool.com
-    Password:
-    UserUser
-         */
-        ArrayList<String> usernamesPositive = new ArrayList<String>(Arrays.asList("helpdesk39@cybertekschool.com",
-                "helpdesk40@cybertekschool.com",
-                "marketing39@cybertekschool.com",
-                "marketing40@cybertekschool.com",
-                "hr39@cybertekschool.com",
-                "hr40@cybertekschool.com"));
-
+    }
+    //=======================================================================================
+    // TC #1. Enter positive user name and positive user password.
+    /*
+Usernames: helpdesk49@cybertekschool.com
+           helpdesk50@cybertekschool.com
+           marketing49@cybertekschool.com
+           marketing50@cybertekschool.com
+           hr49@cybertekschool.com
+           hr50@cybertekschool.com
+Password:  UserUser
+     */
+    //==========================================================================
+    // TC #1. Enter positive user name and positive user password.
+    @Test
+    public void TC1positiveDataTest() throws InterruptedException {
+        ArrayList<String> usernamesPositive = new ArrayList<String>(Arrays.asList("helpdesk49@cybertekschool.com",
+                "helpdesk50@cybertekschool.com",
+                "marketing49@cybertekschool.com",
+                "marketing50@cybertekschool.com",
+                "hr49@cybertekschool.com",
+                "hr50@cybertekschool.com"));
         String password = "UserUser";
-
-
         for (String each : usernamesPositive) {
             // type User name
             driver.findElement(By.name("USER_LOGIN")).sendKeys(each);
             // type Password
             driver.findElement(By.name("USER_PASSWORD")).sendKeys(password);
-
             //====================================================================================
-
             // TC #4 Click login button
             driver.findElement(By.className("login-btn")).click();
+            // do log out
+//            driver.findElement(By.className("user-name")).click();
+//            // click log out button
+//            driver.findElement(By.linkText("Log out")).click();
+//            // clear user id
+//            driver.findElement(By.name("USER_LOGIN")).clear();
 
 
             WebElement like = driver.findElement(By.xpath("//a[.='Like']"));
@@ -88,13 +92,12 @@ public class TestCase7 {
 
 
             if (follow.isDisplayed()) {
-                System.out.println("Users can see " + follow.getText() + "button");
+                System.out.println("Users can see " + follow.getText() + " button");
             } else {
-                System.out.println("Users can not see " + follow.getText() + "button");
+                System.out.println("Users can not see " + follow.getText() + " button");
             }
 
             WebElement eyeButton = driver.findElement(By.xpath("//span[@class='feed-content-view-cnt-wrap']"));
-
             eyeButton.click();
             Thread.sleep(3000);
 
@@ -104,44 +107,14 @@ public class TestCase7 {
                 System.out.println("Users can not see the list of people");
             }
 
-
-        WebElement starIcon = driver.findElement(By.xpath("//div[@class='feed-post-important-switch'][1]"));
-        System.out.println(starIcon.getText());
-        starIcon.click();
-        Thread.sleep(3000);
-
-        // //div[@id='log_entry_favorites_6908']
-
-        if (starIcon.isDisplayed()) {
-            System.out.println("Users can save post as a favorite");
-        } else {
-            System.out.println("Users can not save a post as a favorite");
         }
-
-        WebElement commentButton = driver.findElement(By.xpath("//a[.='Comment'][1]"));
-        commentButton.click();
-        Thread.sleep(5000);
-
-        if (commentButton.isDisplayed()){
-            System.out.println("Users are able to see an opened comment box");
-        }else {
-            System.out.println("Users are not able to see an opened comment box ");
-        }
-
-        WebElement cancelButton = driver.findElement(By.xpath("//button[@class='ui-btn ui-btn-sm ui-btn-link'][1]"));
-        cancelButton.click();
-        Thread.sleep(3000);
-
-        if (!cancelButton.isDisplayed()){
-            System.out.println("Users are able to cancel the comment");
-        }else {
-            System.out.println("Users are not able to cancel the comment");
-        }
-
-
-driver.close();
-
     }
+
+
+    @AfterMethod
+    public void closeDriver() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.close();
     }
+
 }
-
