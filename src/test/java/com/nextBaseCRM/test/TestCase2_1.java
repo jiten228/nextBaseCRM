@@ -2,7 +2,10 @@ package com.nextBaseCRM.test;
 
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -64,24 +67,16 @@ public class TestCase2_1 {
 
         // Search messageBox and type some message in the message box
 
-        WebElement editorFrame = driver.findElement(By.xpath("//iframe[@class='bx-editor-iframe']"));
-        driver.switchTo().frame(editorFrame);
-        WebElement cursor = driver.switchTo().activeElement();
-        cursor.sendKeys("My first message", Keys.ENTER);
-        driver.switchTo().defaultContent();
-
+        WebElement messageBox = driver.findElement(By.xpath("//body[@contenteditable='true']"));
+        messageBox.click();
+        messageBox.sendKeys("My first message"+ Keys.ENTER);
         Thread.sleep(3000);
 
         // Search SEND button and click
-        try {
-            WebElement sendButton = driver.findElement(By.xpath("//button[@id='blog-submit-button-save']"));
-            sendButton.click();
-            System.out.println("Success is always there");
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-        Thread.sleep(2000);
-        driver.close();
+
+        WebElement sendButton = driver.findElement(By.xpath("//button[@id='blog-submit-button-save']"));
+        sendButton.click();
+
     }
 
 
